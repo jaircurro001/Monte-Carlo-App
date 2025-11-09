@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monte Carlo Return Simulator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Investment Risk & Return Simulator</h1>
+    <p>This helps an investor estimate the range of outcomes over a chosen horizon using historical daily returns.</p>
+  </header>
+
+  <section class="controls">
+    <label>Ticker <input id="ticker" value="AAPL" /></label>
+    <label>Years of history <input id="years" type="number" value="5" min="1" max="10" /></label>
+    <label>Days to simulate <input id="days" type="number" value="90" min="5" max="365" /></label>
+    <label># Simulations <input id="sims" type="number" value="10000" min="1000" max="100000" step="1000" /></label>
+    <label>Initial capital ($) <input id="capital" type="number" value="10000" min="100" step="100" /></label>
+    <label>Target return (%) <input id="target" type="number" value="5" step="0.5" /></label>
+    <label>VaR level
+      <select id="varlevel">
+        <option value="0.90">90%</option>
+        <option value="0.95" selected>95%</option>
+        <option value="0.99">99%</option>
+      </select>
+    </label>
+    <label>Sampling
+      <select id="method">
+        <option value="auto" selected>Auto (normality check)</option>
+        <option value="normal">Normal(μ,σ)</option>
+        <option value="bootstrap">Bootstrap</option>
+      </select>
+    </label>
+    <button id="run">Run Simulation</button>
+  </section>
+
+  <section class="results">
+    <div id="metrics" class="card"></div>
+    <div id="hist" class="card plot"></div>
+    <div id="box" class="card plot"></div>
+    <div id="cdf" class="card plot"></div>
+  </section>
+
+  <footer>
+    <p>Data from Yahoo Finance CSV endpoint. Educational use only.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
